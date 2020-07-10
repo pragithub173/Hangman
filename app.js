@@ -20,13 +20,13 @@ const guessesEl = document.querySelector("#guesses");
 const game1 = new Hangman("Cat", 2);
 
 //rendering initial puzzle on screen
-puzzleEl.textContent = game1.getPuzzle();
+puzzleEl.textContent = game1.puzzle;
 
 // game1.makeGuess("c");
 // game1.makeGuess("t");
 // game1.makeGuess("x");
 
-guessesEl.textContent = game1.remainingGuesses;
+guessesEl.textContent = game1.StatusMessage;
 // console.log(game1.getPuzzle());
 // console.log(game1.remainingGuesses); //only if there is a wrong guess the remaning guess decreases and console to rendering on screen with below code
 
@@ -44,8 +44,8 @@ window.addEventListener("keypress", function (e) {
   const guess = String.fromCharCode(e.charCode);
   game1.makeGuess(guess);
   // console.log(game1.getPuzzle()); //this is updated to below
-  puzzleEl.textContent = game1.getPuzzle(); //renders on screen when a letter is typed
+  puzzleEl.textContent = game1.Puzzle; //renders on screen when a letter is typed
   //   console.log(game1.remainingGuesses);//coded below to render on screen
-  guessesEl.textContent = game1.remainingGuesses;
-  console.log(game1.status);
+  guessesEl.textContent = game1.StatusMessage; //remaing as well as ststus
+  //console.log(game1.status);
 });
