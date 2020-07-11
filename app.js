@@ -13,20 +13,15 @@
 // const otherProduct = new String('Phone')
 // console.log(otherProduct)
 
-//updating text content
 const puzzleEl = document.querySelector("#puzzle");
 const guessesEl = document.querySelector("#guesses");
+const game1 = new Hangman("Car Parts", 2);
 
-const game1 = new Hangman("Cat", 2);
-
-//rendering initial puzzle on screen
 puzzleEl.textContent = game1.puzzle;
-
 // game1.makeGuess("c");
 // game1.makeGuess("t");
 // game1.makeGuess("x");
-
-guessesEl.textContent = game1.StatusMessage;
+guessesEl.textContent = game1.statusMessage;
 // console.log(game1.getPuzzle());
 // console.log(game1.remainingGuesses); //only if there is a wrong guess the remaning guess decreases and console to rendering on screen with below code
 
@@ -38,14 +33,27 @@ guessesEl.textContent = game1.StatusMessage;
 // console.log(game2.getPuzzle());
 // console.log(game2.remainingGuesses);
 
-console.log(game1.status);
-
-window.addEventListener("keypress", function (e) {
+window.addEventListener("keypress", (e) => {
   const guess = String.fromCharCode(e.charCode);
   game1.makeGuess(guess);
-  // console.log(game1.getPuzzle()); //this is updated to below
-  puzzleEl.textContent = game1.Puzzle; //renders on screen when a letter is typed
+  puzzleEl.textContent = game1.puzzle; //renders on screen when a letter is typed
   //   console.log(game1.remainingGuesses);//coded below to render on screen
-  guessesEl.textContent = game1.StatusMessage; //remaing as well as ststus
+  guessesEl.textContent = game1.statusMessage; //remaing as well as ststus
   //console.log(game1.status);
 });
+
+// Making an HTTP request
+const request = new XMLHttpRequest();
+
+request.addEventListener("readystatechange", (e) => {
+  if (e.target.readyState === 4 && e.target.status === 200) {
+    console.log(e.target.status); //200 if completed
+    const data = JSON.parse(e.target.responseText); //parsing the json we got on request
+    console.log(data);
+  } else if (e.target.readyState === 4) {
+    console.log("Error has taken place");
+  }
+});
+
+request.open("GET", "http://puzzle.mead.io/puzzle?wordCount=3");
+request.send();

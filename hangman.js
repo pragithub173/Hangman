@@ -92,9 +92,9 @@ class Hangman {
     this.status = "playing";
   }
   calculateStatus() {
-    const finished = this.word.every((letter) => {
-      return this.guessedLetters.includes(letter) || letter === " "; //fixed for if the letter is completed with space
-    });
+    const finished = this.word.every(
+      (letter) => this.guessedLetters.includes(letter) || letter === " "
+    ); //fixed for if the letter is completed with space
 
     if (this.remainingGuesses === 0) {
       this.status = "failed";
@@ -108,9 +108,9 @@ class Hangman {
     if (this.status === "playing") {
       return `Guesses left: ${this.remainingGuesses}`;
     } else if (this.status === "failed") {
-      return `Nice try!The word was "${this.word.join("")}".`;
+      return `Nice try! The word was "${this.word.join("")}".`;
     } else {
-      return `Great work! You guesses the word`;
+      return "Great work! You guessed the word.";
     }
   }
   get puzzle() {
@@ -126,12 +126,12 @@ class Hangman {
 
     return puzzle;
   }
-
   makeGuess(guess) {
     guess = guess.toLowerCase();
     const isUnique = !this.guessedLetters.includes(guess); // checks uniqueness
     const isBadGuess = !this.word.includes(guess); // check if the word is wrong
-    if (this.status != "playing") {
+
+    if (this.status !== "playing") {
       //check game has been succesd by finishing r failing
       return; //return undefined
     }
@@ -139,9 +139,11 @@ class Hangman {
     if (isUnique) {
       this.guessedLetters.push(guess);
     }
+
     if (isUnique && isBadGuess) {
       this.remainingGuesses--;
     }
+
     this.calculateStatus();
   }
 }
