@@ -67,6 +67,14 @@ getPuzzle((error, puzzle) => {
 // request.send();
 
 //challenge
+//passing country code, which ever country code we want we can pass here
+getCountry("US", (error, country) => {
+  if (error) {
+    console.log(`Error: ${error}`);
+  } else {
+    console.log(`Country name is : ${country.name}`);
+  }
+});
 
 // const countryCode = "US";
 // // Making an HTTP request
