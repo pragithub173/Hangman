@@ -42,18 +42,45 @@ window.addEventListener("keypress", (e) => {
   //console.log(game1.status);
 });
 
-// Making an HTTP request
-const request = new XMLHttpRequest();
-
-request.addEventListener("readystatechange", (e) => {
-  if (e.target.readyState === 4 && e.target.status === 200) {
-    console.log(e.target.status); //200 if completed
-    const data = JSON.parse(e.target.responseText); //parsing the json we got on request
-    console.log(data);
-  } else if (e.target.readyState === 4) {
-    console.log("Error has taken place");
+getPuzzle((error, puzzle) => {
+  if (error) {
+    console.log(`Error: ${error}`);
+  } else {
+    console.log(puzzle);
   }
 });
 
-request.open("GET", "http://puzzle.mead.io/puzzle?wordCount=3");
-request.send();
+// Making an HTTP request
+// const request = new XMLHttpRequest();
+
+// request.addEventListener("readystatechange", (e) => {
+//   if (e.target.readyState === 4 && e.target.status === 200) {
+//     console.log(e.target.status); //200 if completed
+//     const data = JSON.parse(e.target.responseText); //parsing the json we got on request
+//     console.log(data);
+//   } else if (e.target.readyState === 4) {
+//     console.log("Error has taken place");
+//   }
+// });
+
+// request.open("GET", "http://puzzle.mead.io/puzzle?wordCount=3");
+// request.send();
+
+//challenge
+
+// const countryCode = "US";
+// // Making an HTTP request
+// const countryRequest = new XMLHttpRequest();
+
+// countryRequest.addEventListener("readystatechange", (e) => {
+//   if (e.target.readyState === 4 && e.target.status === 200) {
+//     const data = JSON.parse(e.target.responseText);
+//     const country = data.find((country) => country.alpha2Code === countryCode);
+//     console.log(country.name);
+//   } else if (e.target.readyState === 4) {
+//     console.log("Unable to fetch data");
+//   }
+// });
+
+// countryRequest.open("GET", "http://restcountries.eu/rest/v2/all");
+// countryRequest.send();
