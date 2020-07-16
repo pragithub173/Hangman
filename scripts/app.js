@@ -15,13 +15,14 @@
 
 const puzzleEl = document.querySelector("#puzzle");
 const guessesEl = document.querySelector("#guesses");
-const game1 = new Hangman("Car Parts", 2);
+let game1;
+//let game1 = new Hangman("Car Parts", 2);
 
-puzzleEl.textContent = game1.puzzle;
+///puzzleEl.textContent = game1.puzzle;
 // game1.makeGuess("c");
 // game1.makeGuess("t");
 // game1.makeGuess("x");
-guessesEl.textContent = game1.statusMessage;
+///guessesEl.textContent = game1.statusMessage;
 // console.log(game1.getPuzzle());
 // console.log(game1.remainingGuesses); //only if there is a wrong guess the remaning guess decreases and console to rendering on screen with below code
 
@@ -36,9 +37,10 @@ guessesEl.textContent = game1.statusMessage;
 window.addEventListener("keypress", (e) => {
   const guess = String.fromCharCode(e.charCode);
   game1.makeGuess(guess);
-  puzzleEl.textContent = game1.puzzle; //renders on screen when a letter is typed
+  render();
+  //puzzleEl.textContent = game1.puzzle; //renders on screen when a letter is typed
   //   console.log(game1.remainingGuesses);//coded below to render on screen
-  guessesEl.textContent = game1.statusMessage; //remaing as well as ststus
+  //guessesEl.textContent = game1.statusMessage; //remaing as well as ststus
   //console.log(game1.status);
 });
 
@@ -57,14 +59,29 @@ window.addEventListener("keypress", (e) => {
 //     console.log(`Error: ${err}`)
 // })
 
+const render = () => {
+  puzzleEl.textContent = game1.puzzle;
+  guessesEl.textContent = game1.statusMessage;
+};
+
+const startGame = async () => {
+  const puzzle = await getPuzzle("2");
+  game1 = new Hangman(puzzle, 5); //new game instance
+  render(); //rendering
+};
+
+document.querySelector("#reset").addEventListener("click", startGame); //start by clciking
+
+startGame(); //default start
+
 //promise
-getPuzzle("2")
-  .then((puzzle) => {
-    console.log(puzzle);
-  })
-  .catch((err) => {
-    console.log(`Error: ${err}`);
-  });
+// getPuzzle("2")
+//   .then((puzzle) => {
+//     console.log(puzzle);
+//   })
+//   .catch((err) => {
+//     console.log(`Error: ${err}`);
+//   });
 
 // Making an HTTP request
 // const request = new XMLHttpRequest();
@@ -134,19 +151,28 @@ getPuzzle("2")
 //     console.log(`Error: ${err}`);
 //   });
 
-getLocation()
-  .then((data) => {
-    //data contains location object
+//asyncawait
+// getCurrentContry()
+//   .then((country) => {
+//     console.log(country.name);
+//   })
+//   .catch((error) => {
+//     console.log(error);
+//   });
 
-    return getCountry(data.country); //promis chaning
-    // console.log(
-    //   `City: ${data.city}, Region:${data.region}, Country:${data.county}`
-    // );
-  })
-  .then((country) => {
-    console.log(country.name);
-  })
+// getLocation()
+//   .then((data) => {
+//     //data contains location object
 
-  .catch((err) => {
-    console.log(`Error: ${err}`);
-  });
+//     return getCountry(data.country); //promis chaning
+//     // console.log(
+//     //   `City: ${data.city}, Region:${data.region}, Country:${data.county}`
+//     // );
+//   })
+//   .then((country) => {
+//     console.log(country.name);
+//   })
+
+//   .catch((err) => {
+//     console.log(`Error: ${err}`);
+//   });
