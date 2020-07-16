@@ -42,13 +42,29 @@ window.addEventListener("keypress", (e) => {
   //console.log(game1.status);
 });
 
-getPuzzle((error, puzzle) => {
-  if (error) {
-    console.log(`Error: ${error}`);
-  } else {
+// getPuzzle((error, puzzle) => {
+//   if (error) {
+//     console.log(`Error: ${error}`);
+//   } else {
+//     console.log(puzzle);
+//   }
+// });
+
+//promise
+// getPuzzle('2').then((puzzle) => {
+//     console.log(puzzle)
+// }, (err) => {
+//     console.log(`Error: ${err}`)
+// })
+
+//promise
+getPuzzle("2")
+  .then((puzzle) => {
     console.log(puzzle);
-  }
-});
+  })
+  .catch((err) => {
+    console.log(`Error: ${err}`);
+  });
 
 // Making an HTTP request
 // const request = new XMLHttpRequest();
@@ -68,13 +84,13 @@ getPuzzle((error, puzzle) => {
 
 //challenge
 //passing country code, which ever country code we want we can pass here
-getCountry("US", (error, country) => {
-  if (error) {
-    console.log(`Error: ${error}`);
-  } else {
-    console.log(`Country name is : ${country.name}`);
-  }
-});
+// getCountry("US", (error, country) => {
+//   if (error) {
+//     console.log(`Error: ${error}`);
+//   } else {
+//     console.log(`Country name is : ${country.name}`);
+//   }
+// });
 
 // const countryCode = "US";
 // // Making an HTTP request
@@ -92,3 +108,45 @@ getCountry("US", (error, country) => {
 
 // countryRequest.open("GET", "http://restcountries.eu/rest/v2/all");
 // countryRequest.send();
+
+// getCountry("US")
+//   .then((country) => {
+//     console.log(country);
+//   })
+//   .catch((err) => {
+//     console.log(`Error: ${err}`);
+//   });
+
+// //promise
+// getCountry('MX').then((country) => {
+//     console.log(country.name)
+// }, (err) => {
+//     console.log(`Error: ${err}`)
+// })
+
+// fetch api challenge
+
+// getCountry("MX")
+//   .then((country) => {
+//     console.log(country.name);
+//   })
+//   .catch((err) => {
+//     console.log(`Error: ${err}`);
+//   });
+
+getLocation()
+  .then((data) => {
+    //data contains location object
+
+    return getCountry(data.country); //promis chaning
+    // console.log(
+    //   `City: ${data.city}, Region:${data.region}, Country:${data.county}`
+    // );
+  })
+  .then((country) => {
+    console.log(country.name);
+  })
+
+  .catch((err) => {
+    console.log(`Error: ${err}`);
+  });
