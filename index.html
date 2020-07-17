@@ -1,11 +1,19 @@
 <!DOCTYPE html>
 
 <html>
-  <head></head>
+  <head>
+    <title>Hangman</title>
+    <link href="/styles/styles.css" rel="stylesheet " />
+    <!-- link fo ricon -->
+    <link href="/images" rel="icon" />
+  </head>
   <body>
-    <p id="puzzle"></p>
-    <p id="guesses"></p>
-    <button id="reset">Reset</button>
+    <div>
+      <!-- single div for centered content -->
+      <div id="puzzle" class="puzzle"></div>
+      <p id="guesses"></p>
+      <button id="reset" class="button">Reset</button>
+    </div>
     <script src="scripts/requests.js"></script>
     <script src="scripts/hangman.js"></script>
     <script src="scripts/app.js"></script>
